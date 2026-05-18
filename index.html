@@ -457,7 +457,68 @@ header{
     transform:translate(-120px,-120px) rotate(12deg);
   }
 }
+.key-box{
+  text-align:center;
+  padding:25px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,255,0.2);
+  box-shadow:0 0 20px rgba(0,255,255,0.2);
+  font-size:22px;
+  color:#00e5ff;
+}
 
+/* GLITCH TEXT */
+.glitch{
+  position:relative;
+  display:inline-block;
+  font-weight:bold;
+  font-size:24px;
+  animation:fadeIn 0.5s ease;
+}
+
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  overflow:hidden;
+}
+
+.glitch::before{
+  color:#ff4fd8;
+  z-index:-1;
+  animation:glitchTop 1s infinite linear alternate-reverse;
+}
+
+.glitch::after{
+  color:#00e5ff;
+  z-index:-2;
+  animation:glitchBottom 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop{
+  0%{transform:translate(0,0);}
+  20%{transform:translate(-2px,-2px);}
+  40%{transform:translate(2px,1px);}
+  60%{transform:translate(-1px,2px);}
+  100%{transform:translate(0,0);}
+}
+
+@keyframes glitchBottom{
+  0%{transform:translate(0,0);}
+  20%{transform:translate(2px,2px);}
+  40%{transform:translate(-2px,-1px);}
+  60%{transform:translate(1px,-2px);}
+  100%{transform:translate(0,0);}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
+}
 </style>
 </head>
 
@@ -500,6 +561,10 @@ header{
 
   <button onclick="showSection('tiktok')">
     🎵 TIKTOK
+  </button>
+
+  <button onclick="showSection('key')">
+    🔑 FREE KEY
   </button>
 
 </div>
@@ -766,6 +831,19 @@ BUY NOW
 
 </section>
 
+<!-- KEY SECTION -->
+<section id="key" class="section">
+
+<h2>🔑 KEY ACCESS</h2>
+
+<br>
+
+<div class="key-box" id="keyBox">
+  <span class="glitch" data-text="7xFree-Jsnd">7xFree-Jsnd</span>
+</div>
+
+</section>
+
 <!-- TIKTOK -->
 <section id="tiktok" class="section">
 
@@ -931,6 +1009,25 @@ function animate(){
 }
 
 animate();
+
+function showSection(id){
+
+  document.querySelectorAll(".section")
+  .forEach(s => s.classList.remove("active"));
+
+  document.getElementById(id)
+  .classList.add("active");
+
+  // trigger glitch restart when KEY tab opens
+  if(id === "key"){
+    const el = document.getElementById("keyBox");
+    el.style.animation = "none";
+    void el.offsetWidth; // reset animation
+    el.style.animation = "fadeIn 0.5s ease";
+  }
+
+  closeMenu();
+}
 
 </script>
 

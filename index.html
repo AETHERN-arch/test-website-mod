@@ -334,7 +334,49 @@ header{
   font-size:20px;
   font-weight:bold;
 }
+/* FLOATING BADGE */
+.badge{
+  position:absolute;
 
+  top:14px;
+  left:14px;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+
+  color:#000;
+  background:#fff;
+
+  z-index:20;
+
+  backdrop-filter:blur(10px);
+
+  box-shadow:
+    0 10px 25px rgba(255,255,255,0.18),
+    0 0 15px rgba(255,255,255,0.12);
+
+  animation:floatBadge 3s ease-in-out infinite;
+}
+
+/* FLOAT ANIMATION */
+@keyframes floatBadge{
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-6px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+}
 .desc{
   opacity:0.7;
   margin-top:8px;

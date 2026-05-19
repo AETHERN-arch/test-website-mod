@@ -1052,6 +1052,8 @@ BUY NOW
 
 </section>
 
+
+
 <!-- KEY SECTION -->
 <section id="key" class="section">
 
@@ -1262,6 +1264,34 @@ function showSection(id){
   closeMenu();
 }
 
+</script>
+
+<script>
+const dropdown = document.querySelector(".dropdown");
+const overlay = document.querySelector(".overlay");
+const menuBtn = document.querySelector(".menu-btn");
+
+// close menu function
+function closeMenu(){
+  dropdown.classList.remove("show");
+  overlay.classList.remove("active");
+}
+
+// attach to ALL dropdown buttons
+document.querySelectorAll(".dropdown button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    closeMenu();
+  });
+});
+
+// also close when clicking overlay
+overlay.addEventListener("click", closeMenu);
+
+// toggle menu button
+menuBtn.addEventListener("click", ()=>{
+  dropdown.classList.toggle("show");
+  overlay.classList.toggle("active");
+});
 </script>
 
 </body>
